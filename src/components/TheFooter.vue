@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-light">
+  <nav class="navbar text-info bg-light">
     <span class="navbar-text">Navbar text with an inline element</span>
   </nav>
 </template>

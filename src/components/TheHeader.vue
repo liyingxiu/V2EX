@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg bg-light">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <router-link class="navbar-brand" to="/">首页</router-link>
         <button
@@ -22,12 +22,12 @@
             placeholder="Search"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜索</button>
         </form>
       </div>
 
       <div>
-        <router-link class="navbar-brand" to="/about">关于</router-link>
+        <router-link class="navbar-brand" to="/about">我的</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -79,8 +79,11 @@ export default {
 
 
 <style scoped>
+a{
+  color: #17a2b8;
+}
 .router-link-exact-active{
-  color: red;
+  color: rgb(19, 15, 10);
 }
 nav{
   display: flex;
