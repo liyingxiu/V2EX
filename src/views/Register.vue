@@ -5,7 +5,7 @@
       <router-link class="text-info" to="/login">Have an account?</router-link>
     </p>
 
-    <form @click.prevent="onSubmit">
+    <form>
       <div class="form-group row">
         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-8">
@@ -33,14 +33,16 @@
         </div>
       </div>-->
       <div class="btn">
-        <button type="button" class="btn btn-outline-info pull-xs-right">Register</button>
+        <button type="button" class="btn btn-outline-info pull-xs-right" @click="onSubmit">Register</button>
       </div>
+      <p>{{currentError}}</p>
     </form>
-    
   </div>
 </template>
 
 <script>
+import { REGISTER } from "@/store/actions.type.js";
+import { mapGetters } from "vuex";
 export default {
   name: "Register",
   data() {
@@ -50,14 +52,18 @@ export default {
       password: ""
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["currentError"])
+  },
   methods: {
     onSubmit() {
-      this.$store.dispatch(REGISTER,{
-        email:this.email,
-        username:this.username,
-        password:this.password
-      }).then(()=>this.$router.push("/home"));
+      this.$store
+        .dispatch(REGISTER, {
+          email: this.email,
+          username: this.username,
+          password: this.password
+        })
+        .then(() => this.$router.push("/login"));
     }
   }
 };
@@ -74,7 +80,7 @@ h2,
 p {
   text-align: center;
 }
-.btn{
+.btn {
   margin-left: 6.9vw;
 }
 </style>
