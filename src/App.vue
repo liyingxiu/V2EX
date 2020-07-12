@@ -21,13 +21,13 @@ export default {
   created() {
     //一开始就判断有没有token
     if (JwtService.getToken() === null) {
-      //没有token
+      //没有token就强制跳到登录页面
       this.$router.push("/login");
     } else {
       //有token再判断是否失效
       this.$store
         .dispatch(SETUSERINFO)
-        .then()
+        .then(() => {this.$router.push("/home")})
         .catch(() => {this.$router.push("/login")});
     }
   }

@@ -47,7 +47,6 @@ const actions = {
                 .then(res => {
                     console.log(res);
                     if (res.data.code === 0) {
-
                         resolve();
                     } else {
                         context.commit(PUSHERROR, res.data.message);
@@ -77,7 +76,7 @@ const actions = {
             ApiService.get('/api/user/info')
                 .then(res => {
                     if (res.data.code === 0) {
-                        //用户的token还是有效的
+                        //用户的token还是有效的，采取的就跟登录时候一样
                         context.commit(SETAUTHENTICATE, true);
                         context.commit(SETUSER, res.data.data);
                         JwtService.saveToken(res.data.data.token);
@@ -91,6 +90,12 @@ const actions = {
                     }
                 })
         })
+    },
+    [LOGOUT](context){
+        context.commit(CLEARERRORS);
+        JwtService.destroyToken();
+        context.commit(SETUSER,{});
+        context.commit(SETAUTHENTICATE,false);
     }
 }
 

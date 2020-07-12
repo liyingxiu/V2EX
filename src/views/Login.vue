@@ -1,26 +1,26 @@
 <template>
   <div class="container">
-    <h2>Login</h2>
+    <h2>登录</h2>
     <p>
-      <router-link class="text-info" to="/register">Need to register?</router-link>
+      <router-link class="text-info" to="/register">还没有账户？注册一个</router-link>
     </p>
 
     <form>
       <div class="form-group row" v-if="isEmail">
-        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+        <label for="inputEmail" class="col-sm-2 col-form-label">邮箱</label>
         <div class="col-sm-8">
           <input type="email" class="form-control" v-model="email" />
         </div>
       </div>
 
       <div class="form-group row" v-else>
-        <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+        <label for="inputUsername" class="col-sm-2 col-form-label">用户名</label>
         <div class="col-sm-8">
           <input type="plaintext" class="form-control" v-model="username" />
         </div>
       </div>
 
-      <div>
+      <div class="btns">
         <button
           type="button"
           class="btn btn-outline-info pull-xs-right"
@@ -36,7 +36,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label">密码</label>
         <div class="col-sm-8">
           <input type="password" class="form-control" v-model="password" />
         </div>
@@ -45,7 +45,7 @@
       <p>{{currentError}}</p>
 
       <div class="btn">
-        <button type="button" class="btn btn-outline-info pull-xs-right" @click="login">Login</button>
+        <button type="button" class="btn btn-outline-info pull-xs-right" @click="login">登录</button>
       </div>
     </form>
   </div>
@@ -92,6 +92,12 @@ p {
   text-align: center;
 }
 .btn {
-  margin-left: 6.9vw;
+  margin-left: 7.7vw;
+}
+.btns{
+  margin-top: 22px;
+  margin-bottom: 22px;
+  text-align: start;
+  margin-left:4.1vw;
 }
 </style>

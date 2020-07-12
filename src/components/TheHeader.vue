@@ -26,20 +26,6 @@
         </form>
       </div>
 
-      <div>
-        <router-link class="navbar-brand" to="/about">我的</router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
         <router-link class="navbar-brand" to="/login">登录</router-link>
         <button
           class="navbar-toggler"
@@ -65,18 +51,25 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div>
+        <router-link class="navbar-brand" to="/about" v-if="isAuthenticated">我的</router-link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
       </div>
     </nav>
   </div>
 </template>
-
-
-<script>
-export default {
-  name: "TheHeader"
-};
-</script>
-
 
 <style scoped>
 a{
@@ -94,3 +87,12 @@ nav{
 
 </style>
 
+<script>
+import {mapGetters} from "vuex";
+export default {
+  name: "TheHeader",
+  computed:{
+    ...mapGetters(['isAuthenticated']),
+  }
+};
+</script>
