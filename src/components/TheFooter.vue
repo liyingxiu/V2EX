@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
 nav{
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100vw;
     padding-left: 150px;

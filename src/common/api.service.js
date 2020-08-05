@@ -23,11 +23,27 @@ const ApiService = {
     put(resource, params) {
         return Vue.axios.put(`${resource}`, params);
     },
-    delete(resource){
-        return Vue.axios.delete(resource).catch(err=>{
+    delete(resource) {
+        return Vue.axios.delete(resource).catch(err => {
             throw new Error(`[ApiService] ${err}`);
         })
     }
 }
 
 export default ApiService;
+
+
+export const ArticlelServive = {
+    get(resource) {
+        return ApiService.get(`/v2ex/${resource}`);
+    },
+    query(resource, params = "") {
+        return ApiService.get(`/v2ex/${resource}`, params);
+    },
+    post(resource, params) {
+        return ApiService.post(`/v2ex/${resource}`, params);
+    },
+    delete(resource) {
+        return ApiService.delete(`/v2ex/${resource}`);
+    }
+}

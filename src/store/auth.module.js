@@ -83,7 +83,7 @@ const actions = {
                         resolve();
                     }else{
                         //用户的token失效
-                        console.log(res.data.data.message);
+                        // console.log(res.data.data.message);
                         JwtService.destroyToken();
                         context.commit(SETAUTHENTICATE, false);
                         reject();
