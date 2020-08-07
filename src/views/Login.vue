@@ -1,34 +1,35 @@
 <template>
   <div class="container">
     <form>
-
-      <label v-if="isEmail">
-        <p class="label-txt">邮箱</p>
-        <button @click.prevent="change">用户名登录</button>
+      <div class="section" v-if="isEmail">
+        <p class="section-txt">
+          邮箱/
+          <u @click.prevent="change">用户名登录</u>
+        </p>
         <input type="text" class="input" v-model="email" />
         <div class="line-box">
           <div class="line"></div>
         </div>
-      </label>
+      </div>
 
-      <label v-else>
-        <p class="label-txt">用户名</p>
-        <button @click.prevent="change">邮箱登录</button>
+      <div class="section" v-else>
+        <p class="section-txt">
+          用户名/
+          <u @click.prevent="change">邮箱登录</u>
+        </p>
         <input type="text" class="input" v-model="username" />
         <div class="line-box">
           <div class="line"></div>
         </div>
-      </label>
+      </div>
 
-      
-
-      <label>
-        <p class="label-txt">密码</p>
+      <div class="section">
+        <p class="section-txt">密码</p>
         <input type="text" class="input" />
         <div class="line-box">
           <div class="line"></div>
         </div>
-      </label>
+      </div>
 
       <div>
         <router-link class="text-info" to="/register">还没有账户？注册一个</router-link>
@@ -36,10 +37,6 @@
 
       <button type="submit">登录</button>
     </form>
-
-
-
-
 
     <form>
       <div class="form-group row" v-if="isEmail">
@@ -69,7 +66,7 @@
           @click="isEmail=true"
           v-else
         >使用邮箱登录</button>
-      </div> -->
+      </div>-->
 
       <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">密码</label>
@@ -104,7 +101,7 @@ export default {
     ...mapGetters(["currentError"]),
   },
   methods: {
-    change(){
+    change() {
       this.isEmail = !this.isEmail;
       console.log(this.isEmail);
     },
@@ -123,7 +120,7 @@ export default {
 
 <style scoped>
 body {
-  background: #c5e1a5;
+  background: rgb(53,166,194);
 }
 form {
   width: 60%;
@@ -134,12 +131,12 @@ form {
   -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }
-label {
+.section {
   display: block;
   position: relative;
   margin: 40px 0px;
 }
-.label-txt {
+.section-txt {
   position: absolute;
   top: -1.6em;
   padding: 10px;
@@ -148,6 +145,9 @@ label {
   letter-spacing: 1px;
   color: rgb(120, 120, 120);
   transition: ease 0.3s;
+}
+.section-txt u{
+  cursor:pointer;
 }
 .input {
   width: 100%;
@@ -171,7 +171,7 @@ label {
   top: 0px;
   left: 50%;
   transform: translateX(-50%);
-  background: #8bc34a;
+  background: rgb(53,166,194);
   transition: ease 0.6s;
 }
 
@@ -197,7 +197,7 @@ button {
 }
 
 button:hover {
-  background: #8bc34a;
+  background: rgb(53,166,194);
   color: #ffffff;
 }
 </style>

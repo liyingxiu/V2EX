@@ -2,7 +2,6 @@ import ApiService from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
 import { LOGIN, LOGOUT, REGISTER,SETUSERINFO } from "@/store/actions.type";
 import { PUSHERROR, CLEARERRORS, SETUSER, SETAUTHENTICATE } from "@/store/mutations.type";
-import { resolve, reject } from "core-js/fn/promise";
 
 const state = {
     errors: [],
