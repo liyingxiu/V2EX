@@ -13,7 +13,10 @@ module.exports = {
         //         changOrigin: true,//允许跨域
         //     }
         // }
-    }
+    },
+    configureWebpack: {
+        devtool: 'source-map'
+      }
 }
 
 // 在页面中使用的时候

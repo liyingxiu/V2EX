@@ -1,9 +1,45 @@
 <template>
   <div class="container">
-    <h2>登录</h2>
-    <p>
-      <router-link class="text-info" to="/register">还没有账户？注册一个</router-link>
-    </p>
+    <form>
+
+      <label v-if="isEmail">
+        <p class="label-txt">邮箱</p>
+        <button @click.prevent="change">用户名登录</button>
+        <input type="text" class="input" v-model="email" />
+        <div class="line-box">
+          <div class="line"></div>
+        </div>
+      </label>
+
+      <label v-else>
+        <p class="label-txt">用户名</p>
+        <button @click.prevent="change">邮箱登录</button>
+        <input type="text" class="input" v-model="username" />
+        <div class="line-box">
+          <div class="line"></div>
+        </div>
+      </label>
+
+      
+
+      <label>
+        <p class="label-txt">密码</p>
+        <input type="text" class="input" />
+        <div class="line-box">
+          <div class="line"></div>
+        </div>
+      </label>
+
+      <div>
+        <router-link class="text-info" to="/register">还没有账户？注册一个</router-link>
+      </div>
+
+      <button type="submit">登录</button>
+    </form>
+
+
+
+
 
     <form>
       <div class="form-group row" v-if="isEmail">
@@ -20,7 +56,7 @@
         </div>
       </div>
 
-      <div class="btns">
+      <!-- <div class="btns">
         <button
           type="button"
           class="btn btn-outline-info pull-xs-right"
@@ -33,7 +69,7 @@
           @click="isEmail=true"
           v-else
         >使用邮箱登录</button>
-      </div>
+      </div> -->
 
       <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">密码</label>
@@ -61,43 +97,107 @@ export default {
       isEmail: true,
       email: "",
       username: "",
-      password: ""
+      password: "",
     };
   },
   computed: {
-    ...mapGetters(["currentError"])
+    ...mapGetters(["currentError"]),
   },
   methods: {
+    change(){
+      this.isEmail = !this.isEmail;
+      console.log(this.isEmail);
+    },
     login() {
       this.$store
         .dispatch(LOGIN, {
           email: this.email,
           username: this.username,
-          password: this.password
+          password: this.password,
         })
         .then(() => this.$router.push("/about"));
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.container {
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 25vw;
+body {
+  background: #c5e1a5;
 }
-h2,
-p {
+form {
+  width: 60%;
+  margin: 60px auto;
+  background: #efefef;
+  padding: 60px 120px 80px 120px;
   text-align: center;
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }
-.btn {
-  margin-left: 7.7vw;
+label {
+  display: block;
+  position: relative;
+  margin: 40px 0px;
 }
-.btns{
-  margin-top: 22px;
-  margin-bottom: 22px;
-  text-align: start;
-  margin-left:4.1vw;
+.label-txt {
+  position: absolute;
+  top: -1.6em;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  color: rgb(120, 120, 120);
+  transition: ease 0.3s;
+}
+.input {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.line-box {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: #bcbcbc;
+}
+
+.line {
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #8bc34a;
+  transition: ease 0.6s;
+}
+
+.input:focus + .line-box .line {
+  width: 100%;
+}
+
+.label-active {
+  top: -3em;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: rgb(220, 220, 220);
+  font-weight: bold;
+  color: rgb(120, 120, 120);
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+
+button:hover {
+  background: #8bc34a;
+  color: #ffffff;
 }
 </style>

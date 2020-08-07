@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import ApiService from "@/common/api.service.js"
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-import '@/mock/mock.js'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
