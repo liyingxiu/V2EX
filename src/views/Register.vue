@@ -1,86 +1,122 @@
 <template>
-  <div class="container">
-    <h2>注册</h2>
-    <p>
-      <router-link class="text-info" to="/login">已经有账户了？直接登录</router-link>
-    </p>
+  <form>
+    <v-text-field
+      v-model="name"
+      :error-messages="nameErrors"
+      :counter="10"
+      label="Name"
+      required
+      @input="$v.name.$touch()"
+      @blur="$v.name.$touch()"
+    ></v-text-field>
+    <v-text-field
+      v-model="email"
+      :error-messages="emailErrors"
+      label="E-mail"
+      required
+      @input="$v.email.$touch()"
+      @blur="$v.email.$touch()"
+    ></v-text-field>
+    <v-text-field
+      v-model="password"
+      :error-messages="passwordErrors"
+      label="Password"
+      required
+      @input="$v.password.$touch()"
+      @blur="$v.password.$touch()"
+    ></v-text-field>
+    <v-text-field
+      v-model="repeatPassword"
+      :error-messages="repeatPasswordErrors"
+      label="Confirm the password"
+      required
+      @input="$v.repeatPassword.$touch()"
+      @blur="$v.repeatPassword.$touch()"
+    ></v-text-field>
 
-    <form>
-      <div class="form-group row">
-        <label for="inputEmail" class="col-sm-3 col-form-label">邮箱</label>
-        <div class="col-sm-8">
-          <input type="email" class="form-control" v-model="email" />
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="inputUsername" class="col-sm-3 col-form-label">用户名</label>
-        <div class="col-sm-8">
-          <input type="plaintext" class="form-control" v-model="username" />
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="inputPassword" class="col-sm-3 col-form-label">密码</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" v-model="password" />
-        </div>
-      </div>
-      <!-- <div class="form-group row">
-        <label for="Confirm" class="col-sm-2 col-form-label">Confirm</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" v-model="email" />
-        </div>
-      </div>-->
-      <div class="btn">
-        <button type="button" class="btn btn-outline-info pull-xs-right" @click="onSubmit">注册</button>
-      </div>
-      <p>{{currentError}}</p>
-    </form>
-  </div>
+    <v-btn class="mr-4" @click="submit">submit</v-btn>
+  </form>
 </template>
 
 <script>
-import { REGISTER } from "@/store/actions.type.js";
-import { mapGetters } from "vuex";
+import { validationMixin } from "vuelidate";
+import {
+  required,
+  maxLength,
+  email,
+  sameAs,
+  minLength,
+} from "vuelidate/lib/validators";
+
 export default {
-  name: "Register",
-  data() {
-    return {
-      username: "",
-      email: "",
-      password: ""
-    };
+  mixins: [validationMixin],
+
+  validations: {
+    name: { required, maxLength: maxLength(10) },
+    email: { required, email },
+    password: { required, minLength: minLength(6) },
+    repeatPassword: { required, sameAsPassword: sameAs("password")},
   },
+
+  data: () => ({
+    name: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  }),
+
   computed: {
-    ...mapGetters(["currentError"])
-  },
-  methods: {
-    onSubmit() {
-      this.$store
-        .dispatch(REGISTER, {
-          email: this.email,
-          username: this.username,
-          password: this.password
-        })
-        .then(() => this.$router.push("/login"));
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.name.$dirty) return errors;
+      !this.$v.name.maxLength &&
+        errors.push("Name must be at most 10 characters long");
+      !this.$v.name.required && errors.push("Name is required.");
+      return errors;
+    },
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.required && errors.push("E-mail is required");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required && errors.push("Password is required");
+      !this.$v.password.minLength &&
+        errors.push("Password must be at least 6 characters");
+      return errors;
+    },
+    repeatPasswordErrors(){
+      const errors = [];
+      if (!this.$v.repeatPassword.$dirty) return errors;
+      !this.$v.repeatPassword.required && errors.push("Password needs to be confirmed");
+      !this.$v.repeatPassword.sameAsPassword && errors.push("Passwords must be identical");
+      return errors;
     }
-  }
+  },
+
+  methods: {
+    submit() {
+      this.$v.$touch();
+    },
+  },
 };
 </script>
 
-
 <style scoped>
-.container {
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 25vw;
+body {
+  background: rgb(53, 166, 194);
 }
-h2,
-p {
+form {
+  width: 60%;
+  margin: 60px auto;
+  background: #efefef;
+  padding: 60px 120px 80px 120px;
   text-align: center;
-}
-.btn {
-  margin-left: 8.7vw;
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
 }
 </style>
