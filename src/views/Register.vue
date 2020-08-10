@@ -4,7 +4,7 @@
       v-model="name"
       :error-messages="nameErrors"
       :counter="10"
-      label="Name"
+      label="姓名"
       required
       @input="$v.name.$touch()"
       @blur="$v.name.$touch()"
@@ -12,7 +12,7 @@
     <v-text-field
       v-model="email"
       :error-messages="emailErrors"
-      label="E-mail"
+      label="邮箱"
       required
       @input="$v.email.$touch()"
       @blur="$v.email.$touch()"
@@ -20,7 +20,7 @@
     <v-text-field
       v-model="password"
       :error-messages="passwordErrors"
-      label="Password"
+      label="密码"
       required
       @input="$v.password.$touch()"
       @blur="$v.password.$touch()"
@@ -28,13 +28,17 @@
     <v-text-field
       v-model="repeatPassword"
       :error-messages="repeatPasswordErrors"
-      label="Confirm the password"
+      label="再次输入密码"
       required
       @input="$v.repeatPassword.$touch()"
       @blur="$v.repeatPassword.$touch()"
     ></v-text-field>
 
-    <v-btn class="mr-4" @click="submit">submit</v-btn>
+    <p>
+      <router-link class="text-info" to="/login">已有账户，直接登录</router-link>
+    </p>
+
+    <v-btn class="mr-4" @click="submit">注册</v-btn>
   </form>
 </template>
 
@@ -112,11 +116,15 @@ body {
 }
 form {
   width: 60%;
-  margin: 60px auto;
+  margin: 20px auto;
   background: #efefef;
   padding: 60px 120px 80px 120px;
   text-align: center;
   -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

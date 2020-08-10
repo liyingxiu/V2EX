@@ -26,6 +26,10 @@
       @blur="$v.password.$touch()"
     ></v-text-field>
 
+    <p>
+      <router-link class="text-info" to="/register">还没有账户？注册一个</router-link>
+    </p>
+
     <v-btn @click="change" style="margin-right:15px" v-if="!isUsernameLogin">使用用户名登录</v-btn>
     <v-btn @click="change" style="margin-right:15px" v-else>使用邮箱登录</v-btn>
     <v-btn class="mr-4" @click="submit">登录</v-btn>
@@ -121,5 +125,9 @@ form {
   text-align: center;
   -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

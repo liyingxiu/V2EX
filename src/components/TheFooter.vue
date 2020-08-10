@@ -1,20 +1,14 @@
 <template>
-  <nav class="navbar text-info bg-light">
-    <span class="navbar-text">Navbar text with an inline element</span>
-  </nav>
+  <v-footer color="indigo" app>
+    <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
+  </v-footer>
 </template>
 
 <script>
 export default {
-  name: "TheFooter"
+  name: "TheFooter",
 };
 </script>
 
 <style scoped>
-nav{
-    position: relative;
-    bottom: 0;
-    width: 100vw;
-    padding-left: 150px;
-}
 </style>
